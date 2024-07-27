@@ -7,7 +7,7 @@ use Cake\TestSuite\TestCase;
 use FeatureFlags\Simple\FeatureManager;
 use InvalidArgumentException;
 
-class SimpleFeatureManagerTest extends TestCase
+class FeatureManagerTest extends TestCase
 {
     public function testConstructorAdd(): void
     {

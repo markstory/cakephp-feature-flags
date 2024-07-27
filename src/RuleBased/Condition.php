@@ -47,24 +47,20 @@ class Condition
             // TODO add more operators
             case 'equal':
                 return $this->value == $contextVal;
-            break;
             case 'in':
                 if (!is_array($this->value)) {
                     return false;
                 }
 
                 return in_array($contextVal, $this->value);
-            break;
             case 'not_equal':
                 return $this->value != $contextVal;
-            break;
             case 'not_in':
                 if (!is_array($this->value)) {
                     return false;
                 }
 
                 return !in_array($contextVal, $this->value);
-            break;
         }
 
         return false;
@@ -74,7 +70,7 @@ class Condition
      * Create a condition from an array of configuration
      *
      * @param array $config The data for a condition
-     * @return \FeatureFlags\RuleBased\Condition
+     * @return self
      */
     public static function fromArray(array $config): Condition
     {
