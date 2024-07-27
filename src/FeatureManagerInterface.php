@@ -16,8 +16,8 @@ interface FeatureManagerInterface
      * data and optionally use `$context` to make more informed decisions
      * about feature flags.
      *
-     * @param  string $name    The name of the feature flag to check
-     * @param  array  $context A mapping of application context data
+     * @param string $name    The name of the feature flag to check
+     * @param array  $context A mapping of application context data
      *                         that is used to make feature
      *                         decisions.
      * @return bool
@@ -30,8 +30,8 @@ interface FeatureManagerInterface
      * If a feature is added more than once, subsequent
      * adds will overwrite the current flag state.
      *
-     * @param  string $name   The name of the feature.
-     * @param  mixed  $config The settings for the feature flag
+     * @param string $name   The name of the feature.
+     * @param mixed  $config The settings for the feature flag
      * @return $this
      */
     public function add(string $name, mixed $config);

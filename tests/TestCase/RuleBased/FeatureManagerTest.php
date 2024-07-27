@@ -20,6 +20,7 @@ class FeatureManagerTest extends TestCase
             if (isset($data['user'])) {
                 $context['user_email'] = $data['user']->email;
             }
+
             return $context;
         };
     }
@@ -35,11 +36,11 @@ class FeatureManagerTest extends TestCase
                             [
                                 'property' => 'user_email',
                                 'op' => 'in',
-                                'value' => ['test@example.com']
-                            ]
+                                'value' => ['test@example.com'],
+                            ],
                         ],
                         'rollout' => 50,
-                    ]
+                    ],
                 ],
             ],
             'shop-v2' => [
@@ -50,14 +51,14 @@ class FeatureManagerTest extends TestCase
                             [
                                 'property' => 'user_email',
                                 'op' => 'in',
-                                'value' => ['other@example.com']
-                            ]
+                                'value' => ['other@example.com'],
+                            ],
                         ],
                         'rollout' => 50,
-                    ]
+                    ],
                 ],
 
-            ]
+            ],
         ];
         $manager = new FeatureManager($this->contextBuilder, $config);
 
@@ -76,7 +77,8 @@ class FeatureManagerTest extends TestCase
 
     public function testAddInvalidSegment(): void
     {
-        $manager = new FeatureManager($this->contextBuilder);;
+        $manager = new FeatureManager($this->contextBuilder);
+
         $manager->add('calendar-v2', [
             'segments' => [
                 ['derp'],
@@ -88,14 +90,15 @@ class FeatureManagerTest extends TestCase
 
     public function testAddInvalidCondition(): void
     {
-        $manager = new FeatureManager($this->contextBuilder);;
+        $manager = new FeatureManager($this->contextBuilder);
+
         $manager->add('calendar-v2', [
             'segments' => [
                 [
                     'name' => 'internal users',
                     'conditions' => [
-                        ['derp']
-                    ]
+                        ['derp'],
+                    ],
                 ],
             ],
         ]);
@@ -117,7 +120,7 @@ class FeatureManagerTest extends TestCase
                             'property' => 'user_email',
                             'operator' => 'lolz',
                             'value' => 'yes',
-                        ]
+                        ],
                     ],
                 ],
             ],
@@ -172,11 +175,11 @@ class FeatureManagerTest extends TestCase
                         [
                             'property' => 'user_email',
                             'op' => 'in',
-                            'value' => ['test@example.com']
-                        ]
+                            'value' => ['test@example.com'],
+                        ],
                     ],
                     'rollout' => 100,
-                ]
+                ],
             ],
         ]);
 
@@ -198,11 +201,11 @@ class FeatureManagerTest extends TestCase
                         [
                             'property' => 'user_email',
                             'op' => 'in',
-                            'value' => ['test@example.com']
-                        ]
+                            'value' => ['test@example.com'],
+                        ],
                     ],
                     'rollout' => 50,
-                ]
+                ],
             ],
         ]);
 
@@ -212,7 +215,6 @@ class FeatureManagerTest extends TestCase
         $this->assertFalse($manager->has('calendar-v2', ['user' => $bad]));
         $this->assertTrue($manager->has('calendar-v2', ['user' => $good]));
     }
-
 
     public function testHasUndefined(): void
     {
@@ -233,11 +235,11 @@ class FeatureManagerTest extends TestCase
                         [
                             'property' => 'user_email',
                             'op' => 'in',
-                            'value' => ['test@example.com']
-                        ]
+                            'value' => ['test@example.com'],
+                        ],
                     ],
                     'rollout' => 0,
-                ]
+                ],
             ],
         ]);
 
@@ -256,11 +258,11 @@ class FeatureManagerTest extends TestCase
                         [
                             'property' => 'user_email',
                             'op' => 'in',
-                            'value' => ['test@example.com']
-                        ]
+                            'value' => ['test@example.com'],
+                        ],
                     ],
                     'rollout' => 0,
-                ]
+                ],
             ],
         ]);
 

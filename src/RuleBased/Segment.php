@@ -29,7 +29,7 @@ class Segment
     public function __construct(
         protected string $name,
         protected array $conditions,
-        protected float|null $rollout,
+        protected ?float $rollout,
     ) {
     }
 

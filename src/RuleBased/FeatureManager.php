@@ -5,7 +5,6 @@ namespace FeatureFlags\RuleBased;
 
 use Closure;
 use FeatureFlags\FeatureManagerInterface;
-use FeatureFlags\RuleBased\Feature;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -74,7 +73,7 @@ class FeatureManager implements FeatureManagerInterface
      * Get a Feature instance for the named feature
      *
      * Once a Feature is created, it will be re-used for the rest of the process.
-     * 
+     *
      * @param string $name The feaeture name to get.
      * @return ?\FeatureFlags\RuleBased\Feature
      */

@@ -11,7 +11,7 @@ use InvalidArgumentException;
  * The following `op` values are supported:
  *
  * - `equal` Match if the context value matches `value`
- * - `not_equal` Match if the context value is not equal to `value` 
+ * - `not_equal` Match if the context value is not equal to `value`
  * - `in` Match if the context value is within the array of `value`.
  * - `not_in` Match if the context value is not contained in the array of `value`.
  *
@@ -45,25 +45,25 @@ class Condition
         $contextVal = $context->get($this->property);
         switch ($this->op) {
             // TODO add more operators
-        case 'equal':
-            return $this->value == $contextVal;
+            case 'equal':
+                return $this->value == $contextVal;
             break;
-        case 'in':
-            if (!is_array($this->value)) {
-                return false;
-            }
+            case 'in':
+                if (!is_array($this->value)) {
+                    return false;
+                }
 
-            return in_array($contextVal, $this->value);
+                return in_array($contextVal, $this->value);
             break;
-        case 'not_equal':
-            return $this->value != $contextVal;
+            case 'not_equal':
+                return $this->value != $contextVal;
             break;
-        case 'not_in':
-            if (!is_array($this->value)) {
-                return false;
-            }
+            case 'not_in':
+                if (!is_array($this->value)) {
+                    return false;
+                }
 
-            return !in_array($contextVal, $this->value);
+                return !in_array($contextVal, $this->value);
             break;
         }
 

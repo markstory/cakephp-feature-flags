@@ -7,7 +7,7 @@ use FeatureFlags\FeatureManagerInterface;
 use InvalidArgumentException;
 
 /**
- * A FeatureManager that implements simple configuration 
+ * A FeatureManager that implements simple configuration
  * based feature flags.
  */
 class FeatureManager implements FeatureManagerInterface
