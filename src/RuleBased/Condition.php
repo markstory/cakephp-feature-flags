@@ -32,9 +32,10 @@ class Condition
     }
 
     /**
-     * Check to see if this feature overlaps any existing methods.
+     * Check if a condition matches $context
      *
      * @param \FeatureFlags\RuleBased\FeaturreContext
+     * @return bool
      */
     public function match(FeatureContext $context): bool
     {
