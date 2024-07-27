@@ -1,0 +1,5 @@
+Potential ideas for a more robust solution:
+
+- Command line tools for validating features and seeing current configuration.
+- A low overhead way to log why features are not matching. Perhaps by setting a logger
+- A DB adapter that reads feature configuration from a table
