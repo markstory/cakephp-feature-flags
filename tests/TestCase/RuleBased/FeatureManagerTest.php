@@ -24,6 +24,48 @@ class FeatureManagerTest extends TestCase
         };
     }
 
+    public function testConstructorAdd(): void
+    {
+        $config = [
+            'calendar-v2' => [
+                'segments' => [
+                    [
+                        'name' => 'internal user',
+                        'conditions' => [
+                            [
+                                'property' => 'user_email',
+                                'op' => 'in',
+                                'value' => ['test@example.com']
+                            ]
+                        ],
+                        'rollout' => 50,
+                    ]
+                ],
+            ],
+            'shop-v2' => [
+                'segments' => [
+                    [
+                        'name' => 'internal user',
+                        'conditions' => [
+                            [
+                                'property' => 'user_email',
+                                'op' => 'in',
+                                'value' => ['other@example.com']
+                            ]
+                        ],
+                        'rollout' => 50,
+                    ]
+                ],
+
+            ]
+        ];
+        $manager = new FeatureManager($this->contextBuilder, $config);
+
+        $good = (object)['email' => 'test@example.com'];
+        $this->assertTrue($manager->has('calendar-v2', ['user' => $good]));
+        $this->assertFalse($manager->has('shop-v2', ['user' => $good]));
+    }
+
     public function testAddInvalidConfigType(): void
     {
         $manager = new FeatureManager($this->contextBuilder);
@@ -201,5 +243,27 @@ class FeatureManagerTest extends TestCase
 
         $good = (object)['email' => 'test@example.com'];
         $this->assertFalse($manager->has('calendar-v2', ['user' => $good]));
+    }
+
+    public function testHasNoContext(): void
+    {
+        $manager = new FeatureManager($this->contextBuilder);
+        $manager->add('calendar-v2', [
+            'segments' => [
+                [
+                    'name' => 'internal user',
+                    'conditions' => [
+                        [
+                            'property' => 'user_email',
+                            'op' => 'in',
+                            'value' => ['test@example.com']
+                        ]
+                    ],
+                    'rollout' => 0,
+                ]
+            ],
+        ]);
+
+        $this->assertFalse($manager->has('calendar-v2'));
     }
 }

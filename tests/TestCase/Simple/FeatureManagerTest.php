@@ -9,6 +9,16 @@ use InvalidArgumentException;
 
 class SimpleFeatureManagerTest extends TestCase
 {
+    public function testConstructorAdd(): void
+    {
+        $manager = new FeatureManager([
+            'calendar-v2' => true,
+            'shop-v2' => false,
+        ]);
+        $this->assertTrue($manager->has('calendar-v2'));
+        $this->assertFalse($manager->has('shop-v2'));
+    }
+
     public function testAddInvalidConfig(): void
     {
         $manager = new FeatureManager();
