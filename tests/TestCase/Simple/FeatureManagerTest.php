@@ -30,7 +30,7 @@ class SimpleFeatureManagerTest extends TestCase
     {
         $manager = new FeatureManager();
         $manager->add('calendar-v2', true);
-        $manager->add('shop-v2', false);
+        $this->assertSame($manager, $manager->add('shop-v2', false));
 
         $this->assertTrue($manager->has('calendar-v2'));
         $this->assertFalse($manager->has('shop-v2'));
@@ -40,5 +40,16 @@ class SimpleFeatureManagerTest extends TestCase
     {
         $manager = new FeatureManager();
         $this->assertFalse($manager->has('undefined-feature'));
+    }
+
+    public function testReset(): void
+    {
+        $manager = new FeatureManager();
+
+        $manager->add('calendar-v2', true);
+        $this->assertTrue($manager->has('calendar-v2'));
+
+        $manager->reset();
+        $this->assertFalse($manager->has('calendar-v2'));
     }
 }

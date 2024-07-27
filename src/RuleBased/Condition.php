@@ -5,6 +5,18 @@ namespace FeatureFlags\RuleBased;
 
 use InvalidArgumentException;
 
+/**
+ * An individual condition in a segment
+ *
+ * The following `op` values are supported:
+ *
+ * - `equal` Match if the context value matches `value`
+ * - `not_equal` Match if the context value is not equal to `value` 
+ * - `in` Match if the context value is within the array of `value`.
+ * - `not_in` Match if the context value is not contained in the array of `value`.
+ *
+ * @internal
+ */
 class Condition
 {
     /**
@@ -19,6 +31,11 @@ class Condition
     ) {
     }
 
+    /**
+     * Check to see if this feature overlaps any existing methods.
+     *
+     * @param \FeatureFlags\RuleBased\FeaturreContext
+     */
     public function match(FeatureContext $context): bool
     {
         if (!$context->has($this->property)) {
@@ -27,31 +44,37 @@ class Condition
         $contextVal = $context->get($this->property);
         switch ($this->op) {
             // TODO add more operators
-            case 'equal':
-                return $this->value == $contextVal;
+        case 'equal':
+            return $this->value == $contextVal;
             break;
-            case 'in':
-                if (!is_array($this->value)) {
-                    return false;
-                }
+        case 'in':
+            if (!is_array($this->value)) {
+                return false;
+            }
 
-                return in_array($contextVal, $this->value);
+            return in_array($contextVal, $this->value);
             break;
-            case 'not_equal':
-                return $this->value != $contextVal;
+        case 'not_equal':
+            return $this->value != $contextVal;
             break;
-            case 'not_in':
-                if (!is_array($this->value)) {
-                    return false;
-                }
+        case 'not_in':
+            if (!is_array($this->value)) {
+                return false;
+            }
 
-                return !in_array($contextVal, $this->value);
+            return !in_array($contextVal, $this->value);
             break;
         }
 
         return false;
     }
 
+    /**
+     * Create a condition from an array of configuration
+     *
+     * @param array $config The data for a condition
+     * @return \FeatureFlags\RuleBased\Condition
+     */
     public static function fromArray(array $config): Condition
     {
         $property = $config['property'] ?? null;
