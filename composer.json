@@ -21,6 +21,16 @@
             "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
         }
     },
+    "scripts": {
+        "check": [
+            "@test",
+            "@cs-check"
+        ],
+        "cs-check": "phpcs --colors -p",
+        "cs-fix": "phpcbf --colors -p",
+        "stan": "phpstan analyse",
+        "test": "phpunit --colors=always"
+    },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,

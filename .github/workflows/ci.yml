@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.1', '8.3']
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: curl, mbstring, intl, pdo_sqlite
+        coverage: pcov
+
+    - name: composer install
+      run: |
+        if ${{ matrix.prefer-lowest == 'prefer-lowest' }}; then
+          composer install --no-progress --prefer-lowest --prefer-stable --ignore-platform-req=php
+        else
+          composer install --no-progress --ignore-platform-req=php
+        fi
+
+    - name: Run PHPUnit
+      run: |
+        if [[ ${{ matrix.php-version }} == '8.3' ]]; then
+          export CODECOVERAGE=1 && vendor/bin/phpunit --coverage-clover=coverage.xml
+        else
+          vendor/bin/phpunit
+        fi
+
+    - name: Submit code coverage
+      if: matrix.php-version == '8.3'
+      uses: codecov/codecov-action@v4
+      with:
+        flags: phpunit
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+  cs-stan:
+    name: Coding Standard & Static Analysis
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        extensions: mbstring, intl
+        coverage: none
+        tools: phive
+
+    - name: composer install
+      run: composer install --no-progress --ignore-platform-req=php
+
+    - name: Install PHP tools with phive.
+      run: phive install --trust-gpg-keys '12CE0F1D262429A5'
+
+    - name: Run PHP CodeSniffer
+      run: vendor/bin/phpcs src/ tests/
+
+    - name: Run psalm
+      if: success() || failure()
+      run: tools/psalm --output-format=github
