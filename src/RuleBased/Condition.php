@@ -58,7 +58,7 @@ class Condition
         $op = $config['op'] ?? null;
         $value = $config['value'] ?? null;
         if ($property === null || $op === null || $value === null) {
-            throw new InvalidArgumentException('Condition with config' . json_encode($config) . ' is invalid.');
+            throw new InvalidArgumentException('Condition with config ' . json_encode($config) . ' is invalid.');
         }
 
         return new Condition($property, $op, $value);
