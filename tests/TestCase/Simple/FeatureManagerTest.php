@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Test\TestCase\Simple;
+namespace FeatureFlags\Test\TestCase\Simple;
 
 use Cake\TestSuite\TestCase;
 use FeatureFlags\Simple\FeatureManager;

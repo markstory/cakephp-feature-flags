@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Test\TestCase\RuleBased;
+namespace FeatureFlags\Test\TestCase\RuleBased;
 
 use Cake\TestSuite\TestCase;
 use Closure;

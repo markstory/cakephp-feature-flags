@@ -74,7 +74,7 @@ jobs:
       run: phive install --trust-gpg-keys '12CE0F1D262429A5'
 
     - name: Run PHP CodeSniffer
-      run: vendor/bin/phpcs src/ tests/
+      run: composer cs-check
 
     - name: Run psalm
       if: success() || failure()
