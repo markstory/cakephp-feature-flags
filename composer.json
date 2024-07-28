@@ -1,5 +1,5 @@
 {
-    "name": "your-name-here/feature-flags",
+    "name": "markstory/feature-flags",
     "description": "FeatureFlags plugin for CakePHP",
     "type": "cakephp-plugin",
     "license": "MIT",
