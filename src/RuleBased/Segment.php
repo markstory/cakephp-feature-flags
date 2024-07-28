@@ -24,7 +24,7 @@ class Segment
      * Constructor for segment
      *
      * @param string $name The name of the segment
-     * @param array<\Feature\Condition> $conditions The conditions that are combined with AND
+     * @param array<\FeatureFlags\RuleBased\Condition> $conditions The conditions that are combined with AND
      */
     public function __construct(
         protected string $name,
@@ -36,7 +36,7 @@ class Segment
     /**
      * Check if a segment's conditions match $context
      *
-     * @param \FeatureFlags\RuleBased\FeaturreContext
+     * @param \FeatureFlags\RuleBased\FeatureContext $context Feature context to match against
      * @return bool
      */
     public function match(FeatureContext $context): bool
@@ -61,8 +61,8 @@ class Segment
     /**
      * Create a segment from an array of configuration
      *
-     * @param array $config The data for a condition
-     * @return \FeatureFlags\RuleBased\Condition
+     * @param array $config The data for a segment
+     * @return \FeatureFlags\RuleBased\Segment
      */
     public static function fromArray(array $config): Segment
     {

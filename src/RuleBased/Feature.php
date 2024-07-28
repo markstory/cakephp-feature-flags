@@ -9,7 +9,7 @@ class Feature
      * Constructor
      *
      * @param string $name The name of the feature.
-     * @var array<\Feature\Segment> $segments List of segments in the feature that are combined with OR.
+     * @param array<\FeatureFlags\RuleBased\Segment> $segments List of segments in the feature that are combined with OR.
      */
     public function __construct(
         protected string $name,
@@ -20,7 +20,7 @@ class Feature
     /**
      * Check if the $context matches a segment in this feature.
      *
-     * @param \Feature\FeatureContext $context
+     * @param \FeatureFlags\RuleBased\FeatureContext $context
      * @return bool
      */
     public function match(FeatureContext $context): bool
@@ -39,7 +39,7 @@ class Feature
      *
      * @param string $name   The name of the feature flagl
      * @param array  $config An array of cofiguration and segmented users
-     * @return \FeatureFlags\Feature
+     * @return \FeatureFlags\RuleBased\Feature
      */
     public static function fromArray(string $name, array $config): Feature
     {

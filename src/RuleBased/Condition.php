@@ -22,7 +22,9 @@ class Condition
     /**
      * Constructor
      *
-     * @param string $name The name of the feature.
+     * @param string $property The property name for the condition
+     * @param string $op The operator for the field of the feature.
+     * @param string|array|int|float|bool $value The value to compare against.
      */
     public function __construct(
         protected string $property,
@@ -34,7 +36,7 @@ class Condition
     /**
      * Check if a condition matches $context
      *
-     * @param \FeatureFlags\RuleBased\FeaturreContext
+     * @param \FeatureFlags\RuleBased\FeatureContext $context The feature context to match with
      * @return bool
      */
     public function match(FeatureContext $context): bool
