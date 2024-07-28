@@ -62,7 +62,7 @@ class Segment
      * Create a segment from an array of configuration
      *
      * @param array $config The data for a segment
-     * @return \FeatureFlags\RuleBased\Segment
+     * @return self
      */
     public static function fromArray(array $config): Segment
     {

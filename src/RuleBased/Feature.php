@@ -39,7 +39,7 @@ class Feature
      *
      * @param string $name   The name of the feature flagl
      * @param array  $config An array of cofiguration and segmented users
-     * @return \FeatureFlags\RuleBased\Feature
+     * @return self
      */
     public static function fromArray(string $name, array $config): Feature
     {

@@ -24,7 +24,7 @@ class Condition
      *
      * @param string $property The property name for the condition
      * @param string $op The operator for the field of the feature.
-     * @param string|array|int|float|bool $value The value to compare against.
+     * @param array|string|float|int|bool $value The value to compare against.
      */
     public function __construct(
         protected string $property,
