@@ -26,6 +26,9 @@ class FeatureFlagsPlugin extends BasePlugin
         return $commands;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
