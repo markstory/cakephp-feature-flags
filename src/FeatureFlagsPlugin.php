@@ -5,6 +5,8 @@ namespace FeatureFlags;
 
 use Cake\Console\CommandCollection;
 use Cake\Core\BasePlugin;
+use Cake\Core\Configure;
+use Cake\Core\PluginApplicationInterface;
 
 /**
  * Plugin for FeatureFlags
@@ -12,10 +14,7 @@ use Cake\Core\BasePlugin;
 class FeatureFlagsPlugin extends BasePlugin
 {
     /**
-     * Add commands for the plugin.
-     *
-     * @param \Cake\Console\CommandCollection $commands The command collection to update.
-     * @return \Cake\Console\CommandCollection
+     * @inheritDoc
      */
     public function console(CommandCollection $commands): CommandCollection
     {
@@ -25,5 +24,12 @@ class FeatureFlagsPlugin extends BasePlugin
         // TODO add feature flag validation tool?
 
         return $commands;
+    }
+
+    public function bootstrap(PluginApplicationInterface $app): void
+    {
+        parent::bootstrap($app);
+
+        Configure::load('features');
     }
 }
