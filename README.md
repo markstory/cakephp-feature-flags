@@ -19,6 +19,12 @@ The recommended way to install composer packages is:
 composer require markstory/cakephp-feature-flags
 ```
 
+Next, load the plugin by running the following command:
+
+```
+bin/cake plugin load FeatureFlags
+```
+
 ## Usage
 
 First you need to decide if you want simple boolean feature flags, or more complex
@@ -37,13 +43,6 @@ return [
         'checkout-v2' => false,
     ],
 ];
-```
-
-Next, in `config/bootstrap.php` add the following:
-
-```php
-// Load the feature configuration during application startup.
-Configure::load('features');
 ```
 
 In your `Application::services()` method add the following:
@@ -102,13 +101,6 @@ return [
         ],
     ],
 ];
-```
-
-Next, in `config/bootstrap.php` add the following:
-
-```php
-// Load the feature configuration during application startup.
-Configure::load('features');
 ```
 
 In your `Application::services()` method add the following:
