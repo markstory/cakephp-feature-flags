@@ -1,6 +1,6 @@
 {
-    "name": "markstory/feature-flags",
-    "description": "FeatureFlags plugin for CakePHP",
+    "name": "markstory/cakephp-feature-flags",
+    "description": "Feature flags plugin for CakePHP",
     "type": "cakephp-plugin",
     "license": "MIT",
     "require": {
@@ -29,7 +29,7 @@
         ],
         "cs-check": "phpcs --colors -p",
         "cs-fix": "phpcbf --colors -p",
-        "stan": "tools/psalm",
+        "psalm": "tools/psalm",
         "test": "phpunit --colors=always"
     },
     "config": {
